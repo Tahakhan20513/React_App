@@ -26,36 +26,24 @@ function App() {
       labletext("Enable LightMode");
       ShowSetAlert("Dark mode enabled", "success");
       document.querySelector('div#root').style.backgroundColor = "rgb(41 53 77)";
-      document.querySelectorAll('.text-secondary').forEach(el => {
-        el.style.setProperty("color", "black", "important");
-      });
-      const lead = document.querySelector('.lead');
-      if (lead) lead.style.color = "black";
-      const textMuted = document.querySelector('.text-muted');
-      if (textMuted) textMuted.style.setProperty("color", "black", "important");
     } else {
       setMode('light');
       labletext("Enable DarkMode");
       ShowSetAlert("Light mode enabled", "success");
       document.querySelector('div#root').style.backgroundColor = "white";
-      document.querySelectorAll('.text-secondary').forEach(el => {
-        el.style.setProperty("color", "#6c757d", "important");
-      });
-      const lead = document.querySelector('.lead');
-      if (lead) lead.style.color = "#6c757d";
-      const textMuted = document.querySelector('.text-muted');
-      if (textMuted) textMuted.style.color = "#6c757d";
     }
   };
 
   return (
     <Router>
-      <AppContent
-        mode={mode}
-        toggleModeBtn={toggleModeBtn}
-        lable={lable}
-        alertMsg={alertMsg}
-      />
+      <div className="app-wrapper">
+        <AppContent
+          mode={mode}
+          toggleModeBtn={toggleModeBtn}
+          lable={lable}
+          alertMsg={alertMsg}
+        />
+      </div>
     </Router>
   );
 }
@@ -77,15 +65,16 @@ function AppContent({ mode, toggleModeBtn, lable, alertMsg }) {
 
       <Alert alert={alertMsg} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/contact" element={<ContactUs />} />
-    
-        <Route path="/search" element={<SearchResults />} />
-        <Route path="/product" element={<ProductDetail />} />
-      </Routes>
+      <div className="app-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/product" element={<ProductDetail />} />
+        </Routes>
+      </div>
 
       {location.pathname !== "/product" && <Footer />}
     </>
